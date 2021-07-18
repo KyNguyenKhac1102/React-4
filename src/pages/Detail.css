@@ -1,0 +1,39 @@
+.detail-group {
+  background-color: rgb(224, 240, 250);
+  height: 400px;
+  width: 400px;
+  margin-left: 30vw;
+  margin-top: 10vh;
+  padding: 20px;
+}
+
+.row-id {
+  text-align: center;
+  font-family: Tahoma;
+  font-size: 17px;
+  font-weight: 600;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  border-bottom: solid 1px black;
+}
+
+.group-title,
+.group-body {
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+  border-bottom: solid 1px black;
+}
+
+.label-title,
+.label-body {
+  font-family: Tahoma;
+  font-size: 17px;
+  color: darkgray;
+  font-weight: 600;
+}
+
+.content-title,
+.content-body {
+  font-family: helvetica;
+  font-weight: bold;
+}
