@@ -1,11 +1,12 @@
-import "bootstrap/dist/css/bootstrap.css";
+import React from "react";
 import Navbar from "./components/Navbar";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const App = () => {
   return (
-    <div>
+    <React.Fragment>
       <Navbar></Navbar>
-    </div>
+    </React.Fragment>
   );
 };
 
