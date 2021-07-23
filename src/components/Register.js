@@ -14,11 +14,11 @@ const Register = () => {
     if (!values.username) {
       errors.username = "Required";
     } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.username)
+      values.username.length < 4 ||
+      !/^[A-Za-z0-9_.]+$/i.test(values.username)
     ) {
-      errors.username = "Invalid username format";
-    } else if (values.username.length < 4) {
-      errors.username = "Must be more than 4 characters";
+      errors.username =
+        "Must be more than 4 characters and only contain word and number";
     }
 
     if (!values.password) {
@@ -30,11 +30,11 @@ const Register = () => {
     if (!values.rePassword) {
       errors.rePassword = "Required";
     } else if (!(values.rePassword === values.password)) {
-      errors.rePassword = "Must be the same password you type";
+      errors.rePassword = "Must be the same password you typed before";
     }
 
     if (!values.isAgree) {
-      errors.isAgree = "You must agree to the term";
+      errors.isAgree = "You must agree to the terms and conditions";
     }
 
     return errors;
@@ -55,7 +55,14 @@ const Register = () => {
         console.log(data);
       }}
     >
-      {({ values, errors, handleChange, handleSubmit, handleBlur }) => (
+      {({
+        values,
+        errors,
+        handleChange,
+        handleSubmit,
+        handleBlur,
+        touched,
+      }) => (
         <Container
           style={{ maxWidth: 500, height: 700, marginTop: 10, padding: 20 }}
           className="border"
@@ -75,9 +82,15 @@ const Register = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Username"
+                isValid={touched.username && !errors.username}
+                isInvalid={!!errors.username}
               ></Form.Control>
+              <Form.Control.Feedback type="invalid">
+                {errors.username}
+              </Form.Control.Feedback>
+              <Form.Control.Feedback>Look good!</Form.Control.Feedback>
             </Form.Group>
-            <Form.Text className="text-danger">{errors.username}</Form.Text>
+
             <Form.Group className="mt-2 mb-2" controlId="formEmail">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -86,8 +99,13 @@ const Register = () => {
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Email"
+                isValid={touched.email && !errors.email}
+                isInvalid={!!errors.email}
               ></Form.Control>
-              <Form.Text className="text-danger">{errors.email}</Form.Text>
+              <Form.Control.Feedback type="invalid">
+                {errors.email}
+              </Form.Control.Feedback>
+              <Form.Control.Feedback>Look good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mt-2 mb-2" controlId="formGender">
               <Form.Label>Gender</Form.Label>
@@ -95,35 +113,45 @@ const Register = () => {
                 name="gender"
                 value={values.gender}
                 onChange={handleChange}
-                onBlur={handleBlur}
                 as="select"
               >
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
               </Form.Control>
-              <Form.Text className="text-danger">{errors.gender}</Form.Text>
             </Form.Group>
             <Form.Group className="mt-2 mb-2" controlId="formPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
+                type="password"
                 name="password"
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Enter Password"
+                isValid={touched.password && !errors.password}
+                isInvalid={!!errors.password}
               ></Form.Control>
-              <Form.Text className="text-danger">{errors.password}</Form.Text>
+              <Form.Control.Feedback type="invalid">
+                {errors.password}
+              </Form.Control.Feedback>
+              <Form.Control.Feedback>Look good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mt-2 mb-2" controlId="formRetypePassword">
               <Form.Label>Retype Password</Form.Label>
               <Form.Control
+                type="password"
                 name="rePassword"
                 value={values.rePassword}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 placeholder="Retype Password"
+                isValid={touched.rePassword && !errors.rePassword}
+                isInvalid={!!errors.rePassword}
               ></Form.Control>
-              <Form.Text className="text-danger">{errors.rePassword}</Form.Text>
+              <Form.Control.Feedback type="invalid">
+                {errors.rePassword}
+              </Form.Control.Feedback>
+              <Form.Control.Feedback>Look good!</Form.Control.Feedback>
             </Form.Group>
             <Form.Group className="mt-2 mb-3" controlId="isAgree">
               <Form.Check

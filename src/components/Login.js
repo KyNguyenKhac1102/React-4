@@ -37,6 +37,9 @@ const Login = ({ setToken, setIsLogin }) => {
               userId: response.data.userId,
               token: response.data.token,
             });
+            sessionStorage.setItem(response.data.userId, response.data.token);
+            axios.defaults.headers.common["Authorization"] =
+              response.data.token;
           })
           .catch((error) => {
             console.log(error);
